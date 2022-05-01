@@ -36,8 +36,14 @@
 #include "libfswatch/c/libfswatch_log.h"
 #include "libfswatch/c++/libfswatch_exception.hpp"
 
-#ifdef HAVE_GETOPT_LONG
-#  include <getopt.h>
+#ifdef _WIN32
+// Drop in replacement can be provided by libunistd.
+#  include <unistd.h>
+#  include <uni_signal.h>
+#else
+#  ifdef HAVE_GETOPT_LONG
+#    include <getopt.h>
+#  endif
 #endif
 
 #define _(String) gettext(String)
